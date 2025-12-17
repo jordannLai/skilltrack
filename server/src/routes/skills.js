@@ -21,4 +21,29 @@ router.post("/", async (req, res) => {
   res.json(result.rows[0]);
 });
 
+// UPDATE skill
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, level } = req.body;
+
+  const result = await pool.query(
+    "UPDATE skills SET name=$1, level=$2 WHERE id=$3 RETURNING *",
+    [name, level, id]
+  );
+
+  res.json(result.rows[0]);
+});
+
+// DELETE skill
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  await pool.query(
+    "DELETE FROM skills WHERE id = $1",
+    [id]
+  );
+
+  res.sendStatus(204);
+});
+
 module.exports = router;

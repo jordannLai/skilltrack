@@ -10,6 +10,9 @@ app.use(express.json());
 app.use("/applications", require("./routes/applications"));
 app.use("/projects", require("./routes/projects"));
 app.use("/skills", require("./routes/skills"));
+app.use("/analytics", require("./routes/analytics"));
+app.use("/ai", require("./routes/ai"));
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
